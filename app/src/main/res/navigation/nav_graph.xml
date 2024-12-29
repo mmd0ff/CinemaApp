@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/introFragment">
+
+    <fragment
+        android:id="@+id/introFragment"
+        android:name="com.example.cinemaatl.fragments.IntroFragment"
+        android:label="fragment_intro"
+        tools:layout="@layout/fragment_intro" >
+        <action
+            android:id="@+id/action_introFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/baseFragment"
+        android:name="com.example.cinemaatl.fragments.BaseFragment"
+        android:label="fragment_base"
+        tools:layout="@layout/fragment_base" >
+        <action
+            android:id="@+id/action_baseFragment_to_filmDetailFragment"
+            app:destination="@id/filmDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/filmDetailFragment"
+        android:name="com.example.cinemaatl.fragments.FilmDetailFragment"
+        android:label="fragment_film_detail"
+        tools:layout="@layout/fragment_film_detail" >
+        <action
+            android:id="@+id/action_filmDetailFragment_to_seatsFragment"
+            app:destination="@id/seatsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/seatsFragment"
+        android:name="com.example.cinemaatl.fragments.SeatsFragment"
+        android:label="fragment_seats"
+        tools:layout="@layout/fragment_seats" />
+</navigation>
