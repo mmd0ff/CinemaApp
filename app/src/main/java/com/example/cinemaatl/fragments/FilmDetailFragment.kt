@@ -1,11 +1,13 @@
 package com.example.cinemaatl.fragments
 
+import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
+import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -33,6 +35,7 @@ class FilmDetailFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,15 +43,14 @@ class FilmDetailFragment : Fragment() {
 
         getBlurView()
 
+
+
         viewModel.selectedMovie.observe(viewLifecycleOwner) { movie ->
             binding.tvDesc.text = movie?.description.toString()
             binding.movieTitle.text = movie?.name.toString()
             binding.tvYear.text = movie?.year.toString()
             binding.duration.text = movie?.movieLength.toString()
             binding.rating.text = movie?.rating.toString()
-
-
-
 
 
             Glide.with(binding.ivPic.context)

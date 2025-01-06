@@ -32,37 +32,36 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dateRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="BILETI CREVYA"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSelected"
 
         />
-
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/timeRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="15dp"
-        android:text="DATA BILETOV"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateRecyclerView" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dateRecyclerView"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="horizontal"/>
+
+
 
     <ImageView
         android:id="@+id/cinemaView"
         android:layout_width="0dp"
-        android:layout_height="460dp"
+        android:layout_height="420dp"
         android:layout_marginTop="20dp"
         android:scaleType="fitXY"
         android:src="@drawable/cinema"
@@ -92,7 +91,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:gravity="center"
-
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

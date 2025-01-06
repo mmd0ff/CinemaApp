@@ -23,4 +23,6 @@ interface MovieService {
         @Query("limit") limit: Int =10,
         @Query("lists") lists: String = "planned-to-watch-films"
     ):retrofit2.Response<CinemaDTO>
+
+
 }

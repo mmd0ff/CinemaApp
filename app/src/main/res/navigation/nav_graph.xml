@@ -36,5 +36,14 @@
         android:id="@+id/seatsFragment"
         android:name="com.example.cinemaatl.fragments.SeatsFragment"
         android:label="fragment_seats"
-        tools:layout="@layout/fragment_seats" />
+        tools:layout="@layout/fragment_seats" >
+        <action
+            android:id="@+id/action_seatsFragment_to_ticketFragment"
+            app:destination="@id/ticketFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketFragment"
+        android:name="com.example.cinemaatl.fragments.TicketFragment"
+        android:label="fragment_ticket"
+        tools:layout="@layout/fragment_ticket" />
 </navigation>
