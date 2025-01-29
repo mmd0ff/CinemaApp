@@ -2,6 +2,7 @@ package com.example.cinemaatl.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +14,7 @@ import com.example.cinemaatl.model.DateModel
 class MovieDateAdapter(
     private val onDateClick: (Int) -> Unit
 ) : RecyclerView.Adapter<MovieDateAdapter.ViewHolderDate>() {
+
     private lateinit var context: Context
     private val dateList = mutableListOf<DateModel>()
 
@@ -45,20 +47,23 @@ class MovieDateAdapter(
         holder.binding.tvDayOfWeek.text = date.dayOfWeek
         holder.binding.tvDayOfMonth.text = date.dayOfMonth.toString()
 
-        holder.binding.root.setOnClickListener {
-            onDateClick(position)
-
-
-        }
+//        holder.binding.root.setOnClickListener {
+//            onDateClick(position)
+//
+//
+//        }
         holder.binding.dateBlock.setOnClickListener {
             lastSelectPosition = selectedPosition
             selectedPosition = position
             notifyItemChanged(selectedPosition)
             notifyItemChanged(lastSelectPosition)
 
+            onDateClick(position)
+            Log.d("MovieDateAdapter", "Date clicked at position: $position")
+
         }
         if (selectedPosition == position) {
-            holder.binding.dateBlock.setBackgroundResource(R.drawable.orange_bg)
+            holder.binding.dateBlock.setBackgroundResource(R.drawable.gold_bg)
         } else holder.binding.dateBlock.setBackgroundResource(R.drawable.light_black_bg)
 
     }

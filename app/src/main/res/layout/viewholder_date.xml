@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:text="Nov"
+        android:text=""
 
         android:textColor="@color/white"
         android:textSize="14sp"
@@ -32,7 +32,7 @@
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="8dp"
-        android:text="11"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="bold"

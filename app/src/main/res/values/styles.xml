@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:paddingTop">4dp</item> <!-- Уменьшаем верхний отступ -->
+        <item name="android:paddingBottom">4dp</item> <!-- Уменьшаем нижний отступ -->
+        <item name="android:layout_margin">0dp</item> <!-- Убираем внешние отступы -->
+        <item name="itemPaddingTop">4dp</item> <!-- Уменьшаем внутренний верхний отступ -->
+        <item name="itemPaddingBottom">4dp</item> <!-- Уменьшаем внутренний нижний отступ -->
+
+    </style>
+
+
+        <style name="ShadowBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+            <item name="android:background">@drawable/bottom_nav_bg_shadow</item>
+            <item name="itemIconTint">@color/bottom_nav_icon_tint</item>
+            <item name="itemTextColor">@color/bottom_nav_text_color</item>
+            <item name="labelVisibilityMode">labeled</item>
+        </style>
+
+</resources>

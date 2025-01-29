@@ -24,5 +24,13 @@ interface MovieService {
         @Query("lists") lists: String = "planned-to-watch-films"
     ):retrofit2.Response<CinemaDTO>
 
+    @GET("v1.4/movie/search")
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Int = 1,
+    ) : retrofit2.Response<CinemaDTO>
+
+
+
 
 }

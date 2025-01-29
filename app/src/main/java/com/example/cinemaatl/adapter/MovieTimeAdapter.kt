@@ -1,6 +1,7 @@
 package com.example.cinemaatl.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -40,19 +41,22 @@ class MovieTimeAdapter(
 
         holder.binding.tvTime.text = timeSlot
 
-        holder.itemView.setOnClickListener {
-            onItemClick(timeSlot)
-
-        }
+//        holder.itemView.setOnClickListener {
+//            onItemClick(timeSlot)
+//
+//        }
         holder.binding.tvTime.setOnClickListener {
             lastSelectedTime = selectedTime
             selectedTime = position
             notifyItemChanged(lastSelectedTime)
             notifyItemChanged(selectedTime)
+
+            onItemClick(timeSlot)
+            Log.d("MovieTimeAdapter", "Time clicked: $timeSlot")
         }
 
         if (selectedTime == position) {
-            holder.binding.tvTime.setBackgroundResource(R.drawable.orange_bg)
+            holder.binding.tvTime.setBackgroundResource(R.drawable.gold_bg)
 
         } else holder.binding.tvTime.setBackgroundResource(R.drawable.light_black_bg)
 

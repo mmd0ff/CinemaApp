@@ -11,7 +11,7 @@ import com.example.cinemaatl.model.Seat
 
 class SeatListAdapter(
     private var context: Context,
-    private val seatList: List<Seat>,
+    private val seatList: MutableList<Seat>,
 //    private val selectedSeat: SelectedSeat
     private val onSeatSelected: (List<String>, Int) -> Unit
 ) : RecyclerView.Adapter<SeatListAdapter.ViewHolderSeat>() {
@@ -79,5 +79,12 @@ class SeatListAdapter(
 
     override fun getItemCount(): Int = seatList.size
 
+    fun updateSeatList(newSeatList: List<Seat>) {
+        seatList.clear()
+        seatList.addAll(newSeatList)
+        notifyDataSetChanged()
+
+
+    }
 
 }

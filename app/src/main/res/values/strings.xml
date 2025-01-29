@@ -2,4 +2,33 @@
     <string name="app_name">CinemaATL</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="tickets">Tickets</string>
+    <string name="profile">Profile</string>
+    <string name="search_movies">Search Movies...</string>
+    <string name="top_movies">Top Movies</string>
+    <string name="imageposter">imagePoster</string>
+    <string name="buy_ticket_button">Buy Ticket</string>
+    <string name="intro_description">Dsadasd asdasdas klklklk ksdlkslkd klk klkklklk asdasdasdasdas sdasd asdas /n sdsad sadasdasdasdasd</string>
+    <string name="get_started_button">Get Started</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="back_to_register_button">Back to register</string>
+    <string name="register">Register</string>
+    <string name="email_register">Email</string>
+    <string name="password_register">Password</string>
+    <string name="repeat_password_register">Repeat password</string>
+    <string name="nickname_register">Nickname</string>
+    <string name="register_button">Register</string>
+    <string name="go_to_login_button">Go to login</string>
+    <string name="search_movies_hint">Search Movies...</string>
+    <string name="selected_seats">Selected Seats</string>
+    <string name="aviable">Aviable</string>
+    <string name="selected">Selected</string>
+    <string name="download_ticket">Download Ticket</string>
+    <string name="titleForTicketFragment">Once you buy a movie ticket simply scan the barcode to access to your movie.</string>
+    <string name="return_to_cinema_list_button">Return to Cinema List</string>
 </resources>

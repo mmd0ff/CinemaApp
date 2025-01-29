@@ -5,8 +5,8 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     kotlin("kapt")
     alias(libs.plugins.hilt)
-//    alias(libs.plugins.google.gms.google.services)
-//    alias(libs.plugins.google.firebase.crashlytics)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 android {
@@ -48,10 +48,10 @@ dependencies {
 
     implementation(libs.bundles.navigationLibs)
 
-//    implementation(libs.firebase.crashlytics)
-//    implementation(libs.firebase.config)
-//    implementation(libs.firebase.firestore)
-//    implementation(libs.firebase.auth)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.config)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toTopOf="@id/btGo"
         android:textSize="16sp"
         android:maxLines="2"
-        android:text="Dsadasd asdasdas klklklk ksdlkslkd klk klkklklk asdasdasdasdas sdasd asdas /n sdsad sadasdasdasdasd"/>
+        android:text="@string/intro_description"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btGo"
@@ -54,9 +54,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
-        android:text="Get Started"
+        android:text="@string/get_started_button"
         android:textSize="18sp"
-        android:background="@drawable/orange_bg"
+        android:background="@drawable/gold_bg"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

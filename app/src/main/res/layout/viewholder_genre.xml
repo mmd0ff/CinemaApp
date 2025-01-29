@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:layout_margin="8dp"
-        android:text="Genre"
+        android:text=""
         android:textColor="@color/white"
         android:background="@drawable/light_black_bg"
         app:layout_constraintBottom_toBottomOf="parent"

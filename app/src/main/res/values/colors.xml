@@ -2,16 +2,42 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_color">#252b45</color>
+    <color name="main_color">#474F74</color>
     <color name="black2">#28292c</color>
     <color name="orange">#d14706</color>
     <color name="grey">#787979</color>
+    <color name="red2">#AA5054</color>
+    <color name="gold">#FCC434</color>
+
     <color name="semired">#E91E63</color>
     <color name="selected">#1AB098</color>
     <color name="unaviable">#B6116B</color>
 
-
     <color name="light_gray">#AAAAAA</color>
     <color name="card_background">#212121</color>
-    <color name="button_background">#FF0000</color>
+<!--    <color name="button_background">#FF0000</color>-->
+<!--    <color name="background">#121212</color> &lt;!&ndash; Темно-серый фон &ndash;&gt;-->
+<!--    <color name="primary_dark">#795548</color> &lt;!&ndash; Темно-синий &ndash;&gt;-->
+    <color name="primary_light">#7B1FA2</color> <!-- Фиолетовый -->
+<!--    <color name="accent_color">#FFA000</color> &lt;!&ndash; Светло-голубой акцент &ndash;&gt;-->
+<!--    <color name="text_color">#FFFFFF</color> &lt;!&ndash; Белый текст &ndash;&gt;-->
+<!--    <color name="inactive_text">#80FFFFFF</color>-->
+
+    <color name="background">#121212</color> <!-- Темно-серый фон -->
+    <color name="primary_dark">#1A237E</color> <!-- Темно-синий -->
+    <color name="accent_color">#0091EA</color> <!-- Светло-голубой акцент -->
+    <color name="text_color">#FFFFFF</color> <!-- Белый текст -->
+    <color name="inactive_text">#80FFFFFF</color>
+<!--    <color name="bottom_nav_background">#80000000</color>-->
+
+    <color name="dark_gray">#121212</color> <!-- Темный фон -->
+    <color name="button_background">#FF5722</color> <!-- Оранжевый цвет кнопок -->
+
+    <color name="bottom_nav_background">#262626</color> <!-- Фон BottomNavigationView -->
+    <color name="bottom_nav_border">#CCCCCC</color> <!-- Цвет верхней границы -->
+    <color name="bottom_nav_default">#CCCCCC</color> <!-- Цвет по умолчанию -->
+    <color name="bottom_nav_selected">#FCC434</color> <!-- Цвет при выборе -->
+
+
+
 </resources>

@@ -19,7 +19,7 @@ import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
 
 class FilmDetailFragment : Fragment() {
-    private lateinit var binding: FragmentFilmDetailBinding
+    private var binding: FragmentFilmDetailBinding? = null
     private val viewModel: MainVM by activityViewModels()
 
     private val adapterGenre = GenreAdapter()
@@ -29,9 +29,9 @@ class FilmDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = FragmentFilmDetailBinding.inflate(layoutInflater, container, false)
-        return binding.root
+        return binding?.root
 
     }
 
@@ -39,23 +39,27 @@ class FilmDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvGenre.adapter = adapterGenre
+        binding?.rvGenre?.adapter = adapterGenre
 
         getBlurView()
 
 
 
         viewModel.selectedMovie.observe(viewLifecycleOwner) { movie ->
-            binding.tvDesc.text = movie?.description.toString()
-            binding.movieTitle.text = movie?.name.toString()
-            binding.tvYear.text = movie?.year.toString()
-            binding.duration.text = movie?.movieLength.toString()
-            binding.rating.text = movie?.rating.toString()
+            binding?.tvDesc?.text = movie?.description.toString()
+            binding?.movieTitle?.text = movie?.name.toString()
+            binding?.tvYear?.text = movie?.year.toString()
+            binding?.duration?.text = movie?.movieLength.toString()
+            binding?.rating?.text = movie?.rating.toString()
 
+            binding?.ivPic?.let {
+                binding?.ivPic?.context?.let { it1 ->
+                    Glide.with(it1)
+                        .load(movie?.poster?.url)
+                        .into(it)
+                }
+            }
 
-            Glide.with(binding.ivPic.context)
-                .load(movie?.poster?.url)
-                .into(binding.ivPic)
 
             if (movie != null) {
                 adapterGenre.updateGenre(movie.genres)
@@ -63,10 +67,10 @@ class FilmDetailFragment : Fragment() {
 
         }
 
-        binding.btBack.setOnClickListener {
+        binding?.btBack?.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.btnBuyTicket.setOnClickListener {
+        binding?.btnBuyTicket?.setOnClickListener {
             findNavController().navigate(R.id.action_filmDetailFragment_to_seatsFragment)
         }
 
@@ -84,8 +88,14 @@ class FilmDetailFragment : Fragment() {
         blurView?.setupWith(rootView, RenderScriptBlur(requireContext()))
             ?.setFrameClearDrawable(windowsBackground)
             ?.setBlurRadius(radius)
-        binding.blurView.outlineProvider = ViewOutlineProvider.BACKGROUND
-        binding.blurView.clipToOutline = true
+        binding?.blurView?.outlineProvider = ViewOutlineProvider.BACKGROUND
+        binding?.blurView?.clipToOutline = true
+    }
+
+    override fun onDestroyView() {
+
+        super.onDestroyView()
+        binding = null
     }
 
 

@@ -5,56 +5,91 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.cinemaatl.R
+import com.example.cinemaatl.UIState
+import com.example.cinemaatl.ViewModels.LoginVM
+import com.example.cinemaatl.databinding.FragmentLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private  var binding: FragmentLoginBinding? = null
+    private val viewModel by viewModels<LoginVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false)
+        binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
+        return binding?.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment LoginFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            LoginFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding?.buttonLogin?.setOnClickListener {
+            binding?.emailInputLayout?.error = null
+            binding?.passwordInputLayout?.error = null
+
+            val email = binding?.emailInput?.text.toString()
+            val password = binding?.passwordInput?.text.toString()
+
+            viewModel.loginUser(email,password)
+
+        }
+
+        binding?.buttonBackToRegister?.setOnClickListener {
+            findNavController().navigate(R.id.registerFragment)
+
+        }
+
+        viewModel.state.observe(viewLifecycleOwner){state ->
+            onStateChange(state)
+
+        }
+
+        }
+        private fun onStateChange(state: UIState<LoginVM.State>){
+            when(state){
+                is UIState.Success -> {
+                    onSuccess(state.data)
+                }
+                is UIState.Loading ->{
+
+                }
+                is UIState.Error -> {
+                    Toast.makeText(requireContext(), "${state.errorMessage}", Toast.LENGTH_SHORT).show()
                 }
             }
+        }
+
+
+        private fun onSuccess(state:LoginVM.State){
+            if (state.isLogined){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToBaseFragment())
+            }
+            showFieldError(state.isValidMail, state.isValidPassword)
+
+
     }
+    private fun showFieldError(isValidEmail: Boolean, isValidPassword: Boolean){
+        if( !isValidEmail)
+            binding?.emailInputLayout?.error = "Email is not correct"
+
+        if(!isValidPassword)
+            binding?.passwordInputLayout?.error = "Password is not correct"
+
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+
 }

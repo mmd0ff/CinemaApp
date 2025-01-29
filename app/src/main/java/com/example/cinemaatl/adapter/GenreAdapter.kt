@@ -17,9 +17,6 @@ class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolderGenre>() {
             ViewHolder(binding.root)
 
 
-
-
-
     @SuppressLint("SuspiciousIndentation")
     override fun onCreateViewHolder(
         parent: ViewGroup,
