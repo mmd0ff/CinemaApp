@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Главная</string>
+    <string name="search">Поиск</string>
+    <string name="tickets">Билеты</string>
+    <string name="profile">Профиль</string>
+    <string name="search_movies">Поиск фильмов...</string>
+    <string name="top_movies">Top Movies</string>
+    <string name="imageposter">imagePoster</string>
+    <string name="buy_ticket_button">Купить Билеты</string>
+    <string name="intro_description">Dsadasd asdasdas klklklk ksdlkslkd klk klkklklk asdasdasdasdas sdasd asdas /n sdsad sadasdasdasdasd</string>
+    <string name="get_started_button">Get Started</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_button">Войти в систему</string>
+    <string name="back_to_register_button">Регистрация</string>
+    <string name="register">Регистрация</string>
+    <string name="email_register">Email</string>
+    <string name="password_register">Пароль</string>
+    <string name="repeat_password_register">Повторить пароль</string>
+    <string name="nickname_register">Nickname</string>
+    <string name="register_button">Регистрация</string>
+    <string name="go_to_login_button">Go to login</string>
+    <string name="search_movies_hint">Поиск фильмов</string>
+    <string name="selected_seats">Выбранные места:</string>
+    <string name="aviable">Доступно</string>
+    <string name="selected">Выбрано</string>
+    <string name="download_ticket">"Скачать билет "</string>
+    <string name="titleForTicketFragment">Once you buy a movie ticket simply scan the barcode to access to your movie.</string>
+    <string name="return_to_cinema_list_button">Return to Cinema List</string>
+    <string name="my_ticket_profile">Мои билеты</string>
+    <string name="payment_history_profile">История покупок</string>
+    <string name="change_language_profile">Поменять язык</string>
+    <string name="logout_profile">Выйти</string>
+    <string name="change_password_profile">Поменять пароль</string>
+    <string name="hi">Привет,</string>
+    <string name="welcome_back">С возвращением</string>
+    <string name="my_ticket">Мои Билеты</string>
+    <string name="total_price">Итого:</string>
+    <string name="unaviable">Занято</string>
+    <string name="close_dialog">Закрыть</string>
+    <string name="hi_with_name">Привет, %1$s</string>
+    <string name="total_price_seats">Итого: %1$s</string>
+    <string name="selected_seats_total">Выбранные места: %1$s</string>
+    <string name="row_inticket">Row: %1$s</string>
+    <string name="payment_finish_after_seconds">Оплата закончится через: %1$s секунд</string>
+
+</resources>

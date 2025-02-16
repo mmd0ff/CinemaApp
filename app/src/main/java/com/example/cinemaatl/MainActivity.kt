@@ -1,18 +1,15 @@
 package com.example.cinemaatl
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.example.cinemaatl.databinding.ActivityMainBinding
-import com.example.cinemaatl.fragments.BaseFragment
-import com.example.cinemaatl.fragments.UserTicketsFragment
+import com.example.cinemaatl.helper.LocaleHelper
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -21,6 +18,7 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
     private  var binding: ActivityMainBinding? = null
+    private var sharedPreference: SharedPreferences? = null
 
     @Inject
     lateinit var firebaseAuth: FirebaseAuth
@@ -30,7 +28,11 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
 
+
+
         setContentView(binding?.root)
+
+        sharedPreference = getPreferences(MODE_PRIVATE)
 
 
         val navHostFragment =
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             Log.d("MainActivity", "Current destination: ${destination.id}")
             when (destination.id) {
-                R.id.introFragment,R.id.seatsFragment, R.id.filmDetailFragment -> {
+                R.id.introFragment,R.id.seatsFragment, R.id.filmDetailFragment,R.id.loginFragment,R.id.registerFragment, R.id.ticketFragment-> {
                     Log.d("MainActivity", "Hiding BottomNavigationView")
                     binding?.bottomNavigation?.visibility = View.GONE
                 }
@@ -91,26 +93,24 @@ class MainActivity : AppCompatActivity() {
             if (userID == null) R.id.registerFragment else R.id.baseFragment
         )
         controller.graph = graph
-//
-//        val userID = firebaseAuth.currentUser?.uid
-//        val graph = controller.navInflater.inflate(R.navigation.nav_graph)
-//        if (userID == null) {
-//            graph.setStartDestination(R.id.registerFragment)
-//        } else {
-//            graph.setStartDestination(R.id.baseFragment)
-//        }
-//        controller.setGraph(graph, null)
 
+        val savedLanguage = LocaleHelper.getSavedLanguage(this)
+        LocaleHelper.setLocale(this, savedLanguage)
+
+        updateBottomNavigationText()
 
     }
 
+    private fun updateBottomNavigationText() {
+        val menu = binding?.bottomNavigation?.menu
+        menu?.let {
+            it.findItem(R.id.baseFragment).title = getString(R.string.home)
+            it.findItem(R.id.searchResultFragment).title = getString(R.string.search)
+            it.findItem(R.id.userTicketsFragment).title = getString(R.string.tickets)
+            it.findItem(R.id.profileFragment).title = getString(R.string.profile)
+        }
+    }
 
-//    private fun changeMyFragment(newFragment: Fragment, title: String) {
-//        supportFragmentManager.beginTransaction()
-//            .replace(R.id.actContainer, newFragment)
-//            .commit()
-//
-//    }
     override fun onDestroy() {
         super.onDestroy()
         binding = null

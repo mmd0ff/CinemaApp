@@ -6,7 +6,7 @@
     android:padding="16dp"
     android:background="@drawable/light_black_bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.RegisterFragment">
+    tools:context=".ui.register.RegisterFragment">
 
     <TextView
         android:id="@+id/labelTitle"

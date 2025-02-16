@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".fragments.SeatsFragment">
+    tools:context=".ui.seats.SeatsFragment">
 
     <ImageView
         android:id="@+id/btBack"
@@ -132,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Unaviable"
+            android:text="@string/unaviable"
             android:textColor="@color/white"
             android:textSize="12sp" />
 
@@ -157,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
-        android:text=""
+        android:text="@string/total_price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ticketState"
         android:layout_margin="28dp"
@@ -169,7 +169,7 @@
         app:layout_constraintTop_toBottomOf="@id/totalPrice"
         app:layout_constraintStart_toStartOf="@id/totalPrice"
         android:textColor="@color/light_gray"
-        android:text=""
+        android:text="@string/selected_seats"
         android:textSize="16sp"
         android:layout_marginTop="15dp"/>
 

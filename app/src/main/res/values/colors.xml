@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="main_color">#474F74</color>
+    <color name="main_color">#1C1C1C</color>
     <color name="black2">#28292c</color>
     <color name="orange">#d14706</color>
     <color name="grey">#787979</color>
@@ -37,6 +37,10 @@
     <color name="bottom_nav_border">#CCCCCC</color> <!-- Цвет верхней границы -->
     <color name="bottom_nav_default">#CCCCCC</color> <!-- Цвет по умолчанию -->
     <color name="bottom_nav_selected">#FCC434</color> <!-- Цвет при выборе -->
+
+    <color name="tab_selected">#FFD700</color> <!-- Золотистый цвет для выбранной вкладки -->
+    <color name="tab_unselected">#FFFFFF</color> <!-- Белый цвет для невыбранной вкладки -->
+    <color name="tab_indicator">#FFD700</color> <!-- Золотистый цвет для индикатора -->
 
 
 

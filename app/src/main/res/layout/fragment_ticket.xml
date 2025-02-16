@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".fragments.TicketFragment">
+    tools:context=".ui.ticket.TicketFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -128,6 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:contentDescription="TODO"
             android:paddingStart="4dp"
             android:paddingEnd="4dp"
             android:src="@drawable/code_barre"
@@ -137,18 +138,22 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btReturn"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="100dp"
-        android:background="@drawable/gold_bg"
-        android:backgroundTint="@color/orange"
-        android:text="@string/return_to_cinema_list_button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Timer"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/whiteBoard" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/whiteBoard"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"/>
+
+
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

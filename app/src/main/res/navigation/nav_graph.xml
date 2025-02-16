@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/introFragment"
-        android:name="com.example.cinemaatl.fragments.IntroFragment"
+        android:name="com.example.cinemaatl.ui.intro.IntroFragment"
         android:label="fragment_intro"
         tools:layout="@layout/fragment_intro" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/baseFragment"
-        android:name="com.example.cinemaatl.fragments.BaseFragment"
+        android:name="com.example.cinemaatl.ui.base.BaseFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_base" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/filmDetailFragment"
-        android:name="com.example.cinemaatl.fragments.FilmDetailFragment"
+        android:name="com.example.cinemaatl.ui.filmdetail.FilmDetailFragment"
         android:label="fragment_film_detail"
         tools:layout="@layout/fragment_film_detail" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/seatsFragment"
-        android:name="com.example.cinemaatl.fragments.SeatsFragment"
+        android:name="com.example.cinemaatl.ui.seats.SeatsFragment"
         android:label="fragment_seats"
         tools:layout="@layout/fragment_seats" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/ticketFragment"
-        android:name="com.example.cinemaatl.fragments.TicketFragment"
+        android:name="com.example.cinemaatl.ui.ticket.TicketFragment"
         android:label="fragment_ticket"
         tools:layout="@layout/fragment_ticket" >
         <action
@@ -56,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchResultFragment"
-        android:name="com.example.cinemaatl.fragments.SearchResultFragment"
+        android:name="com.example.cinemaatl.ui.search.SearchResultFragment"
         android:label="fragment_search_result"
         tools:layout="@layout/fragment_search_result" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.cinemaatl.fragments.LoginFragment"
+        android:name="com.example.cinemaatl.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -74,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.example.cinemaatl.fragments.RegisterFragment"
+        android:name="com.example.cinemaatl.ui.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
@@ -86,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/userTicketsFragment"
-        android:name="com.example.cinemaatl.fragments.UserTicketsFragment"
+        android:name="com.example.cinemaatl.ui.userticket.UserTicketsFragment"
         android:label="@string/tickets"
         tools:layout="@layout/fragment_user_tickets" >
         <action
@@ -95,6 +95,6 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.cinemaatl.fragments.ProfileFragment"
+        android:name="com.example.cinemaatl.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
 </navigation>

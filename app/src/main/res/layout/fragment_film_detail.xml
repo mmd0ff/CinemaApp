@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@color/black"
-    tools:context=".fragments.FilmDetailFragment">
+    tools:context=".ui.filmdetail.FilmDetailFragment">
 
     <!-- Постер фильма -->
     <ImageView
@@ -117,36 +117,43 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text=""
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/poloska" />
 
             <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:id="@+id/scrollTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:clipToPadding="true"
                 android:clipChildren="true"
+                android:clipToPadding="true"
                 android:padding="10dp"
-                app:layout_constraintTop_toBottomOf="@id/tvYear"
-                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintBottom_toTopOf="@id/recyclerviewActor"
+                app:layout_constraintEnd_toEndOf="@id/view"
                 app:layout_constraintStart_toStartOf="@id/view"
-                app:layout_constraintEnd_toEndOf="@id/view">
+                app:layout_constraintTop_toBottomOf="@id/tvYear">
 
                 <TextView
                     android:id="@+id/tvDesc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:maxLines="3"
                     android:textColor="@android:color/white"
 
-                     />
+                    />
 
             </ScrollView>
 
-
-            <!-- Кнопка покупки билета -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerviewActor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="@id/view"
+                app:layout_constraintStart_toStartOf="@id/view"
+                app:layout_constraintTop_toBottomOf="@id/scrollTxt" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -161,12 +168,26 @@
         android:layout_marginBottom="25dp"
         android:background="@drawable/gold_bg"
         android:text="@string/buy_ticket_button"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:textSize="18sp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/blurView"
         app:layout_constraintStart_toStartOf="@id/blurView"
         app:layout_constraintTop_toBottomOf="@id/blurView" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBuyUpcoming"
+        style="@android:style/Widget.Button"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:background="@color/grey"
+        android:text="@string/buy_ticket_button"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/btnBuyTicket"
+        app:layout_constraintEnd_toEndOf="@id/btnBuyTicket"
+        app:layout_constraintStart_toStartOf="@id/btnBuyTicket"
+        app:layout_constraintTop_toTopOf="@id/btnBuyTicket" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

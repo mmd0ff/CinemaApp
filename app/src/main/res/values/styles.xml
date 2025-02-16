@@ -17,4 +17,9 @@
             <item name="labelVisibilityMode">labeled</item>
         </style>
 
+    <style name="SpinnerPopupTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/black</item>
+    </style>
+
 </resources>
