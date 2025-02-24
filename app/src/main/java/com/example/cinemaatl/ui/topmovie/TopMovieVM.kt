@@ -23,9 +23,6 @@ class TopMovieVM @Inject constructor(
     private val _movies: MutableLiveData<UIState<List<Doc>>> = MutableLiveData<UIState<List<Doc>>>()
     val movies: LiveData<UIState<List<Doc>>> = _movies
 
-//    private val _selectedMovie: MutableLiveData<Doc?> = MutableLiveData()
-//    val selectedMovie: LiveData<Doc?> = _selectedMovie
-
 
     fun getTopMovies(page: Int = 1, limit: Int = 10) {
         viewModelScope.launch {
@@ -44,10 +41,11 @@ class TopMovieVM @Inject constructor(
 
             when (result) {
                 is ApiResult.Success -> {
-                    val movieList = result.data?.docs // Получаем список фильмов
-                    if (movieList.isNullOrEmpty()) {
+                    val movieList = result.data?.docs ?: emptyList() // Получаем список фильмов
+                    if (movieList.isEmpty()) {
                         _movies.value = UIState.Error(null, "Список фильмов пуст")
                     } else {
+                        movieList.forEach{it.isTopMovie = true}
                         _movies.value = UIState.Success(movieList)
                     }
                 }
@@ -61,9 +59,7 @@ class TopMovieVM @Inject constructor(
             }
         }
     }
-//    fun selectedMovie(movie: Doc){
-//        _selectedMovie.value = movie
-//    }
+
 }
 
 

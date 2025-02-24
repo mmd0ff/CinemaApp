@@ -1,5 +1,6 @@
 package com.example.cinemaatl.ui.filmdetail
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,15 +9,12 @@ import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.cinemaatl.R
+import com.example.cinemaatl.UIState
 import com.example.cinemaatl.databinding.FragmentFilmDetailBinding
 import com.example.cinemaatl.ui.base.SharedVM
-import com.example.cinemaatl.ui.search.SearchVM
-import com.example.cinemaatl.ui.topmovie.TopMovieVM
-import com.example.cinemaatl.ui.upcomingmovies.UpComingMoviesVM
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -26,15 +24,10 @@ import eightbitlab.com.blurview.RenderScriptBlur
 class FilmDetailFragment : Fragment() {
 
     private var binding: FragmentFilmDetailBinding? = null
-
-//    private val viewModelTop by viewModels<TopMovieVM>()
-//    private val viewModelTop by activityViewModels<TopMovieVM>()
     private val sharedVM by activityViewModels<SharedVM>()
-//    private val viewModelTop by viewModels<TopMovieVM>()
-    private val viewModelUpComing by activityViewModels<UpComingMoviesVM>()
-
 
     private val adapterGenre = GenreAdapter()
+
     private val adapterActor = ActorAdapter()
 
 
@@ -42,89 +35,82 @@ class FilmDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         binding = FragmentFilmDetailBinding.inflate(layoutInflater, container, false)
         return binding?.root
 
     }
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.rvGenre?.adapter = adapterGenre
         binding?.recyclerviewActor?.adapter = adapterActor
 
-//        binding?.recyclerviewActor?.adapter = adapterGenre
-//        viewModelTop.getTopMovies()
-//        viewModelUpComing.getUpcomingMovies()
-
         getBlurView()
 
 
-
-//        viewModelUpComing.selectedMovie.observe(viewLifecycleOwner) { movie ->
-//            binding?.tvDesc?.text = movie?.description.toString()
-//            binding?.movieTitle?.text = movie?.name.toString()
-//            binding?.tvYear?.text = movie?.year.toString()
-//            binding?.duration?.text = movie?.movieLength.toString()
-//            binding?.rating?.text = movie?.rating?.imdb.toString()
-//
-//            binding?.ivPic?.let {
-//                binding?.ivPic?.context?.let { it1 ->
-//                    Glide.with(it1)
-//                        .load(movie?.poster?.url)
-//                        .into(it)
-//                }
-//            }
-//
-//        }
-        sharedVM.selectedMovie.observe(viewLifecycleOwner){ movie ->
-                binding?.tvDesc?.text = movie?.description.toString()
-                binding?.movieTitle?.text = movie?.name.toString()
-                binding?.tvYear?.text = movie?.year.toString()
-                binding?.duration?.text = movie?.movieLength.toString()
-                binding?.rating?.text = movie?.rating?.imdb.toString()
-
-                binding?.ivPic?.let {
-                    binding?.ivPic?.context?.let { it1 ->
-                        Glide.with(it1)
-                            .load(movie?.poster?.url)
-                            .into(it)
-                    }
-                }
-
+        sharedVM.selectedMovie.observe(viewLifecycleOwner) { movie ->
             if (movie != null) {
+                binding?.tvDesc?.text = movie.description ?: "No description"
+                binding?.movieTitle?.text = movie.name ?: "Unknown"
+                binding?.tvYear?.text = movie.year ?: "N/A"
+                binding?.duration?.text = movie.movieLength ?: "N/A"
+                binding?.rating?.text = movie.rating?.imdb ?: "N/A"
 
-                adapterGenre.updateGenre(movie.genres)
+
+                binding?.ivPic?.let { it ->
+                    Glide.with(it.context)
+                        .load(movie.poster?.url)
+                        .into(it)
+
+                }
+                movie.genres?.let { adapterGenre.updateGenre(it) }
+
+            }
+        }
+
+        sharedVM.isMovieTop.observe(viewLifecycleOwner) { isTopMovie ->
+            if (isTopMovie == false) {
+                binding?.btnBuyTicket?.isEnabled = false
+                binding?.btnBuyTicket?.setBackgroundResource(R.drawable.grey_bg)
 
             }
 
-//            if (movie?.persons.isNullOrEmpty()) {
-//                adapterActor.updatePersons(movie?.persons ?: emptyList())
-//                Log.d("FilmDetailFragment", "Persons list is empty or null")
-//            }
-//            else {
-//                Log.d("FilmDetailFragment", "Persons count: ${movie?.persons?.size}")
-//            }
+
         }
-//        val movieId = viewModel.selectedMovie.value?.id
-//        if(movieId != null) {
-//            viewModelUpComing.getMovieId(movieId)
-//        }
+        sharedVM.actors.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.Success -> {
+                    Log.d(
+                        "FilmDetail",
+                        "Actors loaded: count=${state.data.size}, First actor: ${state.data.firstOrNull()?.name}"
+                    )
+                    adapterActor.updatePersons(state.data)
+                }
+
+                is UIState.Loading -> {
+
+                }
+
+                is UIState.Error -> {
+                    Log.e("FilmDetail", "Error loading actors: ${state.errorMessage}")
+                    adapterActor.updatePersons(emptyList())
+                }
+            }
+        }
 
         binding?.btBack?.setOnClickListener {
             findNavController().popBackStack()
         }
+
         binding?.btnBuyTicket?.setOnClickListener {
             findNavController().navigate(R.id.action_filmDetailFragment_to_seatsFragment)
         }
-
-
     }
 
-    fun getBlurView() {
+    private fun getBlurView() {
 
         val blurView = view?.findViewById<BlurView>(R.id.blurView)
 
@@ -140,11 +126,16 @@ class FilmDetailFragment : Fragment() {
         binding?.blurView?.clipToOutline = true
     }
 
+
     override fun onDestroyView() {
 
         super.onDestroyView()
         binding = null
     }
-
-
 }
+
+
+
+
+
+

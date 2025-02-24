@@ -1,11 +1,11 @@
 package com.example.cinemaatl.ui.upcomingmovies
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -19,10 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class UpcomingMovieFragment : Fragment() {
 
     private var binding: FragmentUpcomingMovieBinding? = null
-    private val viewModelUpComing  by viewModels<UpComingMoviesVM>()
+    private val viewModelUpComing by viewModels<UpComingMoviesVM>()
     private val sharedVM by activityViewModels<SharedVM>()
 
-//    private val viewModelUpComing by activityViewModels<UpComingMoviesVM>()
     private var upcomingMovieAdapter = UpcomingMovieAdapter()
 
 
@@ -42,8 +41,8 @@ class UpcomingMovieFragment : Fragment() {
         viewModelUpComing.getUpcomingMovies()
 
         upcomingMovieAdapter.itemClickListener = { movie ->
-            sharedVM.selectedMovie(movie)
-            viewModelUpComing.setButtonState(false)
+            sharedVM.selectedMovie(movie,false)
+
 
             findNavController().navigate(R.id.filmDetailFragment)
         }

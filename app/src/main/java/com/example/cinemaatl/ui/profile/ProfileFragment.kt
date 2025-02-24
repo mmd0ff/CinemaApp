@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaatl.R
 import com.example.cinemaatl.ui.base.MainVM
@@ -20,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private  var  binding: FragmentProfileBinding? = null
-    private val viewModel: MainVM by activityViewModels()
+   private val profileVM by viewModels<ProfileVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,19 +36,19 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getCurrentNickname()
+        profileVM.getCurrentNickname()
 
-        viewModel.getCurrentUserEmail()
+        profileVM.getCurrentuserEmail()
 
-        viewModel.userNickname.observe(viewLifecycleOwner){nickname ->
+        profileVM.userNickname.observe(viewLifecycleOwner){nickname ->
             binding?.name?.text = nickname
         }
-        viewModel.userEmail.observe(viewLifecycleOwner){email ->
+        profileVM.userEmail.observe(viewLifecycleOwner){email ->
             binding?.email?.text = email
         }
 
         binding?.logout?.setOnClickListener {
-            viewModel.logOut()
+            profileVM.logOut()
             findNavController().navigate(R.id.loginFragment)
         }
         binding?.myTicket?.setOnClickListener {

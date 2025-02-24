@@ -11,12 +11,12 @@ plugins {
 
 android {
     namespace = "com.example.cinemaatl"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.cinemaatl"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = 23
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -89,8 +89,8 @@ dependencies {
     implementation (libs.glide)
     kapt(libs.glide)
 
-    implementation ("com.github.Dimezis:BlurView:version-2.0.5")
-    implementation ("androidx.core:core:1.10.1")
+    implementation (libs.blurview.vversion205)
+    implementation (libs.androidx.core)
 
 
 

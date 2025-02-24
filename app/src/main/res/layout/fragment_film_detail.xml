@@ -45,7 +45,7 @@
         app:layout_constraintTop_toBottomOf="@id/ivPic"
         tools:layout_editor_absoluteX="24dp">
 
-        <!-- Внутренний контейнер для элементов внутри BlurView -->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"
             android:layout_width="match_parent"
@@ -175,19 +175,6 @@
         app:layout_constraintStart_toStartOf="@id/blurView"
         app:layout_constraintTop_toBottomOf="@id/blurView" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnBuyUpcoming"
-        style="@android:style/Widget.Button"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:background="@color/grey"
-        android:text="@string/buy_ticket_button"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/btnBuyTicket"
-        app:layout_constraintEnd_toEndOf="@id/btnBuyTicket"
-        app:layout_constraintStart_toStartOf="@id/btnBuyTicket"
-        app:layout_constraintTop_toTopOf="@id/btnBuyTicket" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.cinemaatl.databinding.ViewholderGenreBinding
 import com.example.cinemaatl.model.Genres
 
-class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolderGenre>() {
+class GenreAdapter : RecyclerView.Adapter<GenreAdapter.ViewHolderGenre>() {
 
-    private lateinit var context:Context
+    private lateinit var context: Context
 
     private val genreList = mutableListOf<Genres>()
 
-    inner class ViewHolderGenre(val binding: ViewholderGenreBinding):
-            ViewHolder(binding.root)
+    inner class ViewHolderGenre(val binding: ViewholderGenreBinding) :
+        ViewHolder(binding.root)
 
 
     @SuppressLint("SuspiciousIndentation")
@@ -25,8 +25,8 @@ class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolderGenre>() {
         viewType: Int
     ): ViewHolderGenre {
         context = parent.context
-        val binding = ViewholderGenreBinding.inflate(LayoutInflater.from(context),parent,false)
-            return ViewHolderGenre(binding)
+        val binding = ViewholderGenreBinding.inflate(LayoutInflater.from(context), parent, false)
+        return ViewHolderGenre(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolderGenre, position: Int) {
@@ -40,7 +40,7 @@ class GenreAdapter:RecyclerView.Adapter<GenreAdapter.ViewHolderGenre>() {
 
     override fun getItemCount(): Int = genreList.size
 
-    fun updateGenre(newGenreList: List<Genres>){
+    fun updateGenre(newGenreList: List<Genres>) {
         genreList.clear()
         genreList.addAll(newGenreList)
         notifyDataSetChanged()

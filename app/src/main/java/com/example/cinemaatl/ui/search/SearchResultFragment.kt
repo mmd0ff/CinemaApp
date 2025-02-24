@@ -21,11 +21,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchResultFragment : Fragment() {
 
-    private  var binding: FragmentSearchResultBinding? = null
+    private var binding: FragmentSearchResultBinding? = null
 
-    private val viewModelSearch by viewModels<SearchVM> ()
+    private val viewModelSearch by viewModels<SearchVM>()
     private val sharedVM by activityViewModels<SharedVM>()
-//    private val viewModelTop by viewModels<TopMovieVM>()
+
     private val searchAdapter = SearchAdapter()
 
     override fun onCreateView(
@@ -33,7 +33,7 @@ class SearchResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSearchResultBinding.inflate(layoutInflater,container,false)
+        binding = FragmentSearchResultBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
@@ -45,7 +45,7 @@ class SearchResultFragment : Fragment() {
         binding?.recyclerViewSearchResults?.adapter = searchAdapter
 
         searchAdapter.itemClickListener = { movie ->
-            sharedVM.selectedMovie(movie)
+            sharedVM.selectedMovie(movie,true)
             findNavController().navigate(R.id.action_searchResultFragment_to_filmDetailFragment)
         }
 
@@ -66,20 +66,22 @@ class SearchResultFragment : Fragment() {
 
 
 
-        viewModelSearch.searchResult.observe(viewLifecycleOwner){state ->
-            when(state){
-                is UIState.Loading ->{
+        viewModelSearch.searchResult.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.Loading -> {
                     binding?.progressBarSearch?.visibility = View.VISIBLE
 
                 }
-                is UIState.Success ->{
+
+                is UIState.Success -> {
                     binding?.progressBarSearch?.visibility = View.GONE
                     val movies = state.data
-                    if(movies != null){
+                    if (movies != null) {
                         searchAdapter.updateData(movies)
                     }
                 }
-                is UIState.Error ->{
+
+                is UIState.Error -> {
                     binding?.progressBarSearch?.visibility = View.GONE
                     Toast.makeText(requireContext(), "Failed to load", Toast.LENGTH_SHORT).show()
 

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.example.cinemaatl.databinding.ViewholderTopBinding
-import com.example.cinemaatl.model.ButtonState
 import com.example.cinemaatl.model.Doc
 
 class UpcomingMovieAdapter:RecyclerView.Adapter<UpcomingMovieAdapter.ViewHolderTop>() {

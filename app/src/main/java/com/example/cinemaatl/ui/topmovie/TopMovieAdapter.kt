@@ -9,21 +9,20 @@ import com.bumptech.glide.Glide
 import com.example.cinemaatl.databinding.ViewholderTopBinding
 import com.example.cinemaatl.model.Doc
 
-class TopMovieAdapter():RecyclerView.Adapter<TopMovieAdapter.ViewHolderTop>() {
+class TopMovieAdapter() : RecyclerView.Adapter<TopMovieAdapter.ViewHolderTop>() {
 
     private lateinit var context: Context
     private val movies = mutableListOf<Doc>()
     var itemClickListener: ((Doc) -> Unit)? = null
 
 
-    inner class ViewHolderTop(val binding: ViewholderTopBinding):
-    ViewHolder(binding.root)
-
+    inner class ViewHolderTop(val binding: ViewholderTopBinding) :
+        ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderTop {
         context = parent.context
-        val binding = ViewholderTopBinding.inflate(LayoutInflater.from(context),parent,false)
+        val binding = ViewholderTopBinding.inflate(LayoutInflater.from(context), parent, false)
         return ViewHolderTop(binding)
 
 
@@ -35,14 +34,9 @@ class TopMovieAdapter():RecyclerView.Adapter<TopMovieAdapter.ViewHolderTop>() {
         val doc = movies[position]
         holder.binding.title.text = doc.name
 
-//        holder.itemView.setOnClickListener {
-//            onItemClicked(doc)
-//
-//            Toast.makeText(context, "Heloooooo", Toast.LENGTH_SHORT).show()
-//        }
 
         Glide.with(holder.binding.pic.context)
-            .load(doc.poster.url)
+            .load(doc.poster?.url)
             .into(holder.binding.pic)
 
         holder.itemView.setOnClickListener {
@@ -51,7 +45,7 @@ class TopMovieAdapter():RecyclerView.Adapter<TopMovieAdapter.ViewHolderTop>() {
         }
     }
 
-    fun updateData(newData: List<Doc>){
+    fun updateData(newData: List<Doc>) {
         movies.clear()
         movies.addAll(newData)
         notifyDataSetChanged()

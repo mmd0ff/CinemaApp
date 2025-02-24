@@ -1,15 +1,16 @@
 package com.example.cinemaatl.ui.intro
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.cinemaatl.helper.ZoomOutPageTransformer
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.cinemaatl.R
 import com.example.cinemaatl.databinding.FragmentIntroBinding
+import com.example.cinemaatl.helper.ZoomOutPageTransformer
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -95,8 +96,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class IntroFragment : Fragment() {
 
-    private var _binding: FragmentIntroBinding? = null
-    private val binding get() = _binding!!
+    private var binding: FragmentIntroBinding? = null
+
 
     private val imageList = listOf(
         R.drawable.tenet,
@@ -112,21 +113,21 @@ class IntroFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentIntroBinding.inflate(inflater, container, false)
-        return binding.root
+    ): ConstraintLayout? {
+        binding = FragmentIntroBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewPager: ViewPager2 = binding.viewPager
+        val viewPager: ViewPager2 = binding!!.viewPager
         val pagerAdapter = ViewPagerAdapter(imageList) // Создаем адаптер с List<Int>
         viewPager.adapter = pagerAdapter
         viewPager.setPageTransformer(ZoomOutPageTransformer())
         viewPager.offscreenPageLimit = 1
 
-        viewPager.setCurrentItem(1,true)
+        viewPager.setCurrentItem(1, true)
 
 
         // Вот здесь происходит использование extension-функции!
@@ -137,7 +138,7 @@ class IntroFragment : Fragment() {
 //        )
 
 
-        binding.btGo.setOnClickListener {
+        binding?.btGo?.setOnClickListener {
             findNavController().navigate(IntroFragmentDirections.actionIntroFragmentToRegisterFragment())
 
         }
@@ -145,7 +146,7 @@ class IntroFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 
 

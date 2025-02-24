@@ -15,20 +15,10 @@ class CompletePaymentDialogFragment : DialogFragment() {
 
     private var binding: FragmentCompletePaymentDialogBinding? = null
 
-
-        override fun onStart() {
-            super.onStart()
-            val dialog = dialog
-            if (dialog != null) {
-                val width = ViewGroup.LayoutParams.MATCH_PARENT
-                val height = ViewGroup.LayoutParams.WRAP_CONTENT
-                dialog.window?.setLayout(width, height)
-
-//            val inset = InsetDrawable(ColorDrawable(Color.TRANSPARENT), 16.dp(requireContext()))
-//            dialog.window?.setBackgroundDrawable(inset)
-            }
-        }
-
+    override fun onStart() {
+        super.onStart()
+        dialog?.window?.setBackgroundDrawableResource(android.R.color.transparent) // Прозрачный фон окна
+    }
 
 
     override fun onCreateView(
@@ -36,11 +26,11 @@ class CompletePaymentDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCompletePaymentDialogBinding.inflate(layoutInflater,container,false)
+        binding = FragmentCompletePaymentDialogBinding.inflate(layoutInflater, container, false)
         return binding?.root
 
 
-        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,8 +38,9 @@ class CompletePaymentDialogFragment : DialogFragment() {
             findNavController().navigate(R.id.baseFragment)
 
             dismiss()
+        }
     }
-    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

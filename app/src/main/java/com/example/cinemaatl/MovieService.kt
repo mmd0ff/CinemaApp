@@ -1,7 +1,7 @@
 package com.example.cinemaatl
 
 import com.example.cinemaatl.model.CinemaDTO
-import okhttp3.Response
+import com.example.cinemaatl.model.MovieDetailDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -20,7 +20,7 @@ interface MovieService {
     @GET("/v1.4/movie/{id}")
     suspend fun getActorByID(
         @Path("id") id: String
-    ) :retrofit2.Response<CinemaDTO>
+    ) :retrofit2.Response<MovieDetailDTO>
 
     @GET("v1.4/movie")
     suspend fun getUpcomingMovies(

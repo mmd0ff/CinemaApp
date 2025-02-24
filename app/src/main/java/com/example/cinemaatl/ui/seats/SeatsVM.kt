@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.cinemaatl.UIState
 import com.example.cinemaatl.model.DateModel
+import com.example.cinemaatl.model.Seat
 import com.example.cinemaatl.model.TicketModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.time.LocalDate
@@ -19,20 +20,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SeatsVM
+
 @Inject constructor(
 
 ) : ViewModel() {
 
+//
+//    private val _seats: MutableLiveData<List<Seat>> = MutableLiveData()
+//    val seats: LiveData<List<Seat>> = _seats
+
     private val _selectedSeats: MutableLiveData<List<String>> = MutableLiveData()
     val selectedSeats: LiveData<List<String>> = _selectedSeats
+
+    //выбранная дата
+    private val _selectedDate: MutableLiveData<DateModel?> = MutableLiveData()
+    val selectedDate: LiveData<DateModel?> = _selectedDate
 
     //список доступных дат
     private val _daysList: MutableLiveData<List<DateModel>> = MutableLiveData()
     val daysList: LiveData<List<DateModel>> = _daysList
 
-    //выбранная дата
-    private val _selectedDate: MutableLiveData<DateModel?> = MutableLiveData()
-    val selectedDate: LiveData<DateModel?> = _selectedDate
+
 
     //выбранное время
     private val _selectedTime: MutableLiveData<String?> = MutableLiveData()
@@ -133,3 +141,107 @@ class SeatsVM
         return Pair(dayOfWeek, "$dayOfMonth $month") // Возвращаем пару: день недели и "число месяц"
     }
 }
+//package com.example.cinemaatl.ui.Seats
+//
+//import androidx.lifecycle.LiveData
+//import androidx.lifecycle.MutableLiveData
+//import androidx.lifecycle.ViewModel
+//import com.example.cinemaatl.model.DateModel
+//import com.example.cinemaatl.model.Seat
+//import dagger.hilt.android.lifecycle.HiltViewModel
+//import java.time.LocalDate
+//import java.time.format.TextStyle
+//import java.util.Locale
+//import javax.inject.Inject
+//
+//@HiltViewModel
+//class SeatsVM @Inject constructor() : ViewModel() {
+//
+//    // Список мест
+//    private val _seats = MutableLiveData<List<Seat>>()
+//    val seats: LiveData<List<Seat>> = _seats
+//
+//    // Выбранные места
+//    private val _selectedSeats = MutableLiveData<List<Seat>>()
+//    val selectedSeats: LiveData<List<Seat>> = _selectedSeats
+//
+//    // Выбранная дата
+//    private val _selectedDate = MutableLiveData<DateModel?>()
+//    val selectedDate: LiveData<DateModel?> = _selectedDate
+//
+//    // Выбранное время
+//    private val _selectedTime = MutableLiveData<String?>()
+//    val selectedTime: LiveData<String?> = _selectedTime
+//
+//    // Общая стоимость
+//    private val _totalPrice = MutableLiveData<Int>()
+//    val totalPrice: LiveData<Int> = _totalPrice
+//
+//    init {
+//        generateSeats()
+//        generateDates()
+//    }
+//
+//    // Генерация списка мест
+//    private fun generateSeats() {
+//        val seats = (0 until 60).map { index ->
+//            val row = ('A' + index / 5).toString()
+//            val seatNumber = (index % 5) + 1
+//            val seatName = "$row$seatNumber"
+//            val status = when (index) {
+//                2, 20, 21, 33, 41, 42, 50 -> Seat.SeatStatus.UNAVIABLE
+//                else -> Seat.SeatStatus.AVIABLE
+//            }
+//            Seat(status, seatName)
+//        }
+//        _seats.value = seats
+//    }
+//
+//    // Генерация списка дат
+//    private fun generateDates() {
+//        val today = LocalDate.now()
+//        val dates = (0 until 30).map { i ->
+//            val date = today.plusDays(i.toLong())
+//            formatDate(date)
+//        }
+//        _selectedDate.value = dates.firstOrNull()
+//    }
+//
+//    // Форматирование даты
+//    private fun formatDate(date: LocalDate): DateModel {
+//        val dayOfWeek = date.dayOfWeek.getDisplayName(TextStyle.SHORT, Locale.getDefault())
+//        val dayOfMonth = date.dayOfMonth.toString()
+//        return DateModel(dayOfWeek, dayOfMonth, date)
+//    }
+//
+//    // Выбор места
+//    fun selectSeat(seat: Seat) {
+//        val currentSelectedSeats = _selectedSeats.value.orEmpty().toMutableList()
+//        if (seat.status == Seat.SeatStatus.AVIABLE) {
+//            if (currentSelectedSeats.contains(seat)) {
+//                currentSelectedSeats.remove(seat)
+//            } else {
+//                currentSelectedSeats.add(seat)
+//            }
+//            _selectedSeats.value = currentSelectedSeats
+//            calculateTotalPrice()
+//        }
+//    }
+//
+//    // Выбор даты
+//    fun selectDate(date: DateModel) {
+//        _selectedDate.value = date
+//    }
+//
+//    // Выбор времени
+//    fun selectTime(time: String) {
+//        _selectedTime.value = time
+//    }
+//
+//    // Расчет общей стоимости
+//    private fun calculateTotalPrice() {
+//        val pricePerSeat = 500 // Цена за одно место
+//        val total = (_selectedSeats.value?.size ?: 0) * pricePerSeat
+//        _totalPrice.value = total
+//    }
+//}

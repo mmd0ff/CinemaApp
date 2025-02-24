@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.example.cinemaatl.BookingVM
+import com.example.cinemaatl.R
 import com.example.cinemaatl.UIState
 import com.example.cinemaatl.databinding.FragmentUserTicketsBinding
 import com.example.cinemaatl.model.TicketModel
+import com.example.cinemaatl.ui.ticket.TicketVM
 import com.example.cinemaatl.ui.topmovie.TopMovieVM
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class UserTicketsFragment : Fragment() {
 
 //    private val viewModelTicket by viewModels<UserTicketVM>()
-    private val viewModelTicket by activityViewModels<UserTicketVM>()
+//    private val viewModelTicket by activityViewModels<UserTicketVM>()
+    private val ticketVM by activityViewModels<TicketVM>()
     private val viewModelTop: TopMovieVM by viewModels<TopMovieVM>()
     private var binding: FragmentUserTicketsBinding? = null
 
@@ -38,41 +43,41 @@ class UserTicketsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val adapter = UserTicketsAdapter(emptyList()) { ticket ->
+        val adapter = UserTicketsAdapter { ticket ->
             showDeleteConfirmationDialog(ticket)
 
         }
         binding?.ticketsRecyclerView?.adapter = adapter
 
-        viewModelTicket.loadUserTickets()
-
-        viewModelTop.movies.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is UIState.Success -> {
-                    adapter.updateMovies(state.data)
-                }
-
-                is UIState.Error -> {
-                    Toast.makeText(
-                        requireContext(),
-                        "Error loading movies: ${state.errorMessage}",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-
-                is UIState.Loading -> {
 
 
-                }
-            }
-
-        }
+//        ticketVM.ticketState.observe(viewLifecycleOwner) { state ->
+//            when (state) {
+//                is UIState.Success -> {
+//                    adapter.updateMovies(state.data)
+//                }
+//
+//                is UIState.Error -> {
+//                    Toast.makeText(
+//                        requireContext(),
+//                        "Error loading movies: ${state.errorMessage}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+//                }
+//
+//                is UIState.Loading -> {
+//
+//
+//                }
+//            }
+//
+//        }
 
         // Загружаем билеты пользователя
 
 
         // Подписываемся на состояние загрузки билетов
-        viewModelTicket.ticketsState.observe(viewLifecycleOwner) { state ->
+        ticketVM.ticketState.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UIState.Loading -> {
                     binding?.progressBar?.visibility =
@@ -94,16 +99,17 @@ class UserTicketsFragment : Fragment() {
                 }
             }
         }
+        ticketVM.loadUserTickets()
     }
 
     private fun showDeleteConfirmationDialog(ticket: TicketModel) {
         AlertDialog.Builder(requireContext())
-            .setTitle("Delete Confirmation")
-            .setMessage("Are you sure you want to delete this ticket?")
-            .setPositiveButton("Delete") { _, _ ->
-                viewModelTicket.deleteTicket(ticket)
+            .setTitle(getString(R.string.delete_confirmation))
+            .setMessage(getString(R.string.are_you_sure_dialog))
+            .setPositiveButton(getString(R.string.delete_dialog)) { _, _ ->
+                ticketVM.deleteTicket(ticket)
             }
-            .setNegativeButton("Cancel") { dialog, _ ->
+            .setNegativeButton(getString(R.string.cancel_dialog)) { dialog, _ ->
                 dialog.dismiss()
             }
             .create()
