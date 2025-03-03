@@ -2,16 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="6dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_margin="16dp">
+    android:layout_margin="12dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/pic"
         android:layout_width="140dp"
-        android:layout_height="180dp"
-
+        android:layout_height="190dp"
         app:shapeAppearanceOverlay="@style/CircleImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

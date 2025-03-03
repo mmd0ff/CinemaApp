@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         app:navGraph = "@navigation/nav_graph"
         android:name = "androidx.navigation.fragment.NavHostFragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -38,8 +38,9 @@
         app:itemPaddingBottom="13dp"
         app:itemPaddingTop="10dp"
         app:labelVisibilityMode="labeled"
-        app:itemIconTint="@color/bottom_nav_text_color"
+        style="@style/NoRippleBottomNavigation"
         app:itemTextColor="@color/bottom_nav_text_color"
+        app:itemIconTint="@color/bottom_nav_text_color"
         app:menu="@menu/bottombar_menu"
         />
 

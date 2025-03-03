@@ -1,155 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="1dp"
-    android:layout_marginTop="28dp"
- >
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="#212121"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="8dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:maxHeight="100dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
-        app:cardBackgroundColor="@color/main_color"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<androidx.constraintlayout.widget.ConstraintLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:padding="12dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="4dp">
+<com.google.android.material.imageview.ShapeableImageView
+    android:id="@+id/moviePoster"
+    android:layout_width="90dp"
+    android:layout_height="120dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/venom"
+    app:shapeAppearanceOverlay="@style/CircleImageView"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/moviePoster"
-                android:layout_width="90dp"
-                android:layout_height="130dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/venom"
-                app:shapeAppearanceOverlay="@style/CircleImageView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<TextView
+    android:id="@+id/movieTitle"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:text="Название фильма"
+    android:textColor="@android:color/white"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:ellipsize="end"
+    android:maxLines="1"
+    app:layout_constraintStart_toEndOf="@id/moviePoster"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="8dp" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:background="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/moviePoster"
-                app:layout_constraintTop_toTopOf="parent" />
+<TextView
+    android:id="@+id/seats"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="8dp"
+    android:text="Row: 1, 2"
+    android:textColor="#B0BEC5"
+    android:textSize="14sp"
+    app:layout_constraintStart_toEndOf="@id/moviePoster"
+    app:layout_constraintTop_toBottomOf="@id/movieTitle"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="8dp" />
 
-            <TextView
-                android:id="@+id/movieTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:text="Название фильма"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toTopOf="parent" />
+<TextView
+    android:id="@+id/date"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="4dp"
+    android:text="Date: 12.03.2025"
+    android:textColor="#B0BEC5"
+    android:textSize="14sp"
+    app:layout_constraintStart_toEndOf="@id/moviePoster"
+    app:layout_constraintTop_toBottomOf="@id/seats"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="8dp" />
 
-            <TextView
-                android:id="@+id/seats"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:paddingStart="16dp"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/movieTitle" />
+<TextView
+    android:id="@+id/time"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="4dp"
+    android:text="Time: 18:00"
+    android:textColor="#B0BEC5"
+    android:textSize="14sp"
+    app:layout_constraintStart_toEndOf="@id/moviePoster"
+    app:layout_constraintTop_toBottomOf="@id/date"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="8dp" />
 
-            <View
-                android:id="@+id/divider1"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="#FFFFFF"
-                android:paddingStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/seats" />
-
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingStart="16dp"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/divider1" />
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingStart="16dp"
-                android:text=""
-                android:textColor="@color/white"
-                android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/date" />
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="#FFFFFF"
-                android:paddingStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/time" />
-
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:paddingStart="16dp"
-                android:text=""
-                android:textColor="@color/gold"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/divider"
-                app:layout_constraintTop_toBottomOf="@id/divider2" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/deleteBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="deletebutton"
-        android:src="@drawable/ic_trash"
-        android:backgroundTint="@color/black"
-
-        app:layout_constraintStart_toEndOf="@id/cardView"
-
-        app:layout_constraintTop_toTopOf="@id/cardView"
-        app:layout_constraintBottom_toBottomOf="@id/cardView"/>
-
-
+<TextView
+    android:id="@+id/price"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginTop="4dp"
+    android:text="Price: 15$"
+    android:textColor="@color/gold"
+    android:textSize="16sp"
+    android:textStyle="bold"
+    app:layout_constraintStart_toEndOf="@id/moviePoster"
+    app:layout_constraintTop_toBottomOf="@id/time"
+    app:layout_constraintEnd_toEndOf="parent"
+    android:layout_marginEnd="8dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>

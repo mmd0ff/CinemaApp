@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:background="@color/black"
     tools:context=".ui.filmdetail.FilmDetailFragment">
 
     <!-- Постер фильма -->
+
     <ImageView
         android:id="@+id/ivPic"
         android:layout_width="0dp"
@@ -16,6 +16,7 @@
         android:contentDescription="@string/imageposter"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -24,27 +25,24 @@
         android:id="@+id/btBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
+        android:layout_margin="30dp"
         android:contentDescription="TODO"
         android:src="@drawable/back_2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Эффект Blur -->
-
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_margin="25dp"
-
         android:layout_marginBottom="25dp"
         android:background="@drawable/blur_bg"
         app:blurOverlayColor="#90000000"
         app:layout_constraintBottom_toBottomOf="@id/ivPic"
         app:layout_constraintTop_toBottomOf="@id/ivPic"
         tools:layout_editor_absoluteX="24dp">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/view"
@@ -75,7 +73,7 @@
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@id/tvYear"
+                app:layout_constraintBottom_toTopOf="@id/poloska"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/movieTitle" />
@@ -84,66 +82,118 @@
                 android:id="@+id/poloska"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/gradient_bg"
-                app:layout_constraintBottom_toTopOf="@id/tvYear"
+                app:layout_constraintBottom_toTopOf="@id/detailsLine"
                 app:layout_constraintTop_toBottomOf="@id/rvGenre" />
 
-            <TextView
-                android:id="@+id/tvYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text=""
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/poloska" />
 
-            <TextView
-                android:id="@+id/duration"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/detailsLine"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text=""
-                android:textColor="@color/white"
-                app:layout_constraintStart_toEndOf="@id/tvYear"
-                app:layout_constraintTop_toBottomOf="@id/poloska"
-
-                />
-
-            <TextView
-                android:id="@+id/rating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:textColor="@color/white"
+                android:paddingVertical="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/poloska" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/poloska">
 
-            <ScrollView
+
+                <ImageView
+                    android:id="@+id/imageYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_yearwhite"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Текст года -->
+                <TextView
+                    android:id="@+id/tvYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageYear"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Иконка продолжительности -->
+                <ImageView
+                    android:id="@+id/imageDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_durationx"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tvYear"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Текст продолжительности -->
+                <TextView
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageDuration"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Иконка рейтинга -->
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_rating"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!-- Текст рейтинга -->
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/star"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            <androidx.core.widget.NestedScrollView
                 android:id="@+id/scrollTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:background="@drawable/nested_scroll_border"
                 android:clipChildren="true"
                 android:clipToPadding="true"
                 android:padding="10dp"
                 app:layout_constraintBottom_toTopOf="@id/recyclerviewActor"
                 app:layout_constraintEnd_toEndOf="@id/view"
                 app:layout_constraintStart_toStartOf="@id/view"
-                app:layout_constraintTop_toBottomOf="@id/tvYear">
+                app:layout_constraintTop_toBottomOf="@id/detailsLine">
 
                 <TextView
                     android:id="@+id/tvDesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:maxLines="3"
-                    android:textColor="@android:color/white"
-
-                    />
-
-            </ScrollView>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto"
+                    android:textColor="@android:color/white" />
+            </androidx.core.widget.NestedScrollView>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerviewActor"
@@ -151,10 +201,9 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="@id/view"
+
                 app:layout_constraintStart_toStartOf="@id/view"
                 app:layout_constraintTop_toBottomOf="@id/scrollTxt" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -174,7 +223,5 @@
         app:layout_constraintEnd_toEndOf="@id/blurView"
         app:layout_constraintStart_toStartOf="@id/blurView"
         app:layout_constraintTop_toBottomOf="@id/blurView" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

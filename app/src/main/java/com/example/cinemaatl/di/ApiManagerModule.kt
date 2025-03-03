@@ -1,6 +1,6 @@
 package com.example.cinemaatl.di
 
-import com.example.cinemaatl.ApiInterceptorKey
+import com.example.cinemaatl.common.ApiInterceptorKey
 import com.example.cinemaatl.MovieService
 import dagger.Module
 import dagger.Provides

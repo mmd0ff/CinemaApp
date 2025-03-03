@@ -15,12 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textColor="@color/white"
+        android:textColor="@color/grey"
         android:textSize="30sp"
         android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold"
         android:layout_marginTop="48dp"
 
-        android:text="Cinema Ticket Booking" />
+        android:text="ATL Cinema Booking" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -36,17 +37,21 @@
         android:layout_marginTop="40dp"/>
 
     <TextView
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textColor="@color/white"
+        android:textColor="@color/grey"
+        android:fontFamily="@font/roboto"
         app:layout_constraintTop_toBottomOf="@id/viewPager"
         app:layout_constraintStart_toStartOf="@id/viewPager"
         app:layout_constraintEnd_toEndOf="@id/viewPager"
         app:layout_constraintBottom_toTopOf="@id/btGo"
-        android:textSize="16sp"
-        android:maxLines="2"
-        android:text="@string/intro_description"/>
+        android:layout_margin = "30dp"
+
+        android:textSize="21sp"
+        android:maxLines="3"
+        android:text="Discover and book the latest movies on our cinema. Easy and fast!"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btGo"

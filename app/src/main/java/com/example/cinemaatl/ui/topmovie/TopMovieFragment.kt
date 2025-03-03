@@ -10,9 +10,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaatl.R
-import com.example.cinemaatl.UIState
+import com.example.cinemaatl.ui.core.UIState
 import com.example.cinemaatl.databinding.FragmentTopMovieBinding
-import com.example.cinemaatl.ui.base.SharedVM
+import com.example.cinemaatl.ui.shared.SharedVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

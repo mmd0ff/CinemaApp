@@ -10,16 +10,19 @@
     </style>
 
 
-        <style name="ShadowBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-            <item name="android:background">@drawable/bottom_nav_bg_shadow</item>
-            <item name="itemIconTint">@color/bottom_nav_icon_tint</item>
-            <item name="itemTextColor">@color/bottom_nav_text_color</item>
-            <item name="labelVisibilityMode">labeled</item>
-        </style>
+<!--        <style name="ShadowBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">-->
+<!--            <item name="android:background">@drawable/bottom_nav_bg_shadow</item>-->
+<!--            <item name="itemIconTint">@color/bottom_nav_icon_tint</item>-->
+<!--            <item name="itemTextColor">@color/bottom_nav_text_color</item>-->
+<!--            <item name="labelVisibilityMode">labeled</item>-->
+<!--        </style>-->
 
     <style name="SpinnerPopupTheme" parent="ThemeOverlay.AppCompat.Dark">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/black</item>
+    </style>
+    <style name="NoRippleBottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemRippleColor">@android:color/transparent</item>
     </style>
 
 </resources>

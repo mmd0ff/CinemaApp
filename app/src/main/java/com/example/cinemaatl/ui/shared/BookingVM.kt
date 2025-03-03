@@ -1,4 +1,4 @@
-package com.example.cinemaatl
+package com.example.cinemaatl.ui.shared
 
 import android.os.Build
 import androidx.annotation.RequiresApi

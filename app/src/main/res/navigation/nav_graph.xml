@@ -12,7 +12,14 @@
         tools:layout="@layout/fragment_intro" >
         <action
             android:id="@+id/action_introFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_introFragment_to_baseFragment"
+            app:destination="@id/baseFragment" />
     </fragment>
 
     <fragment
@@ -36,6 +43,7 @@
             android:id="@+id/action_filmDetailFragment_to_seatsFragment"
             app:destination="@id/seatsFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/seatsFragment"
         android:name="com.example.cinemaatl.ui.seats.SeatsFragment"
@@ -45,6 +53,7 @@
             android:id="@+id/action_seatsFragment_to_ticketFragment"
             app:destination="@id/ticketFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/ticketFragment"
         android:name="com.example.cinemaatl.ui.ticket.TicketFragment"
@@ -53,7 +62,15 @@
         <action
             android:id="@+id/action_ticketFragment_to_userTicketsFragment"
             app:destination="@id/userTicketsFragment" />
+        <action
+            android:id="@+id/action_ticketFragment_to_paymentSuccess"
+            app:destination="@id/paymentSuccess"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
+
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.example.cinemaatl.ui.search.SearchResultFragment"
@@ -83,6 +100,13 @@
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerSuccess"
+            app:destination="@id/registerSuccess"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
     </fragment>
     <fragment
         android:id="@+id/userTicketsFragment"
@@ -97,4 +121,14 @@
         android:id="@+id/profileFragment"
         android:name="com.example.cinemaatl.ui.profile.ProfileFragment"
         android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/paymentSuccess"
+        android:name="com.example.cinemaatl.ui.success.PaymentSuccess"
+        android:label="fragment_payment_success"
+        tools:layout="@layout/fragment_payment_success" />
+    <fragment
+        android:id="@+id/registerSuccess"
+        android:name="com.example.cinemaatl.ui.success.RegisterSuccess"
+        android:label="fragment_register_success"
+        tools:layout="@layout/fragment_register_success" />
 </navigation>

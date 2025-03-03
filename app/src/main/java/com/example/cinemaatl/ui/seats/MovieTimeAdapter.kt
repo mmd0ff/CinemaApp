@@ -41,10 +41,7 @@ class MovieTimeAdapter(
 
         holder.binding.tvTime.text = timeSlot
 
-//        holder.itemView.setOnClickListener {
-//            onItemClick(timeSlot)
-//
-//        }
+
         holder.binding.tvTime.setOnClickListener {
             lastSelectedTime = selectedTime
             selectedTime = position

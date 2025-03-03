@@ -11,16 +11,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.cinemaatl.BookingVM
+import com.example.cinemaatl.ui.shared.BookingVM
 import com.example.cinemaatl.R
 import com.example.cinemaatl.databinding.FragmentSeatsBinding
 import com.example.cinemaatl.model.Seat
-import com.example.cinemaatl.ui.base.SharedVM
-import com.example.cinemaatl.ui.topmovie.TopMovieVM
+import com.example.cinemaatl.ui.shared.SharedVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @RequiresApi(Build.VERSION_CODES.O)

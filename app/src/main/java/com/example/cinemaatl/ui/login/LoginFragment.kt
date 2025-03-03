@@ -1,30 +1,31 @@
 package com.example.cinemaatl.ui.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.cinemaatl.R
-import com.example.cinemaatl.UIState
 import com.example.cinemaatl.databinding.FragmentLoginBinding
+import com.example.cinemaatl.ui.core.CoreFragment
+import com.example.cinemaatl.ui.core.UIState
+import com.example.cinemaatl.ui.shared.AuthVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : CoreFragment() {
 
-    private  var binding: FragmentLoginBinding? = null
-    private val viewModel by viewModels<LoginVM>()
+    private var binding: FragmentLoginBinding? = null
+    private val authVM by activityViewModels<AuthVM>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentLoginBinding.inflate(layoutInflater,container,false)
+        binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
@@ -32,58 +33,65 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.buttonLogin?.setOnClickListener {
-            binding?.emailInputLayout?.error = null
-            binding?.passwordInputLayout?.error = null
-
-            val email = binding?.emailInput?.text.toString()
-            val password = binding?.passwordInput?.text.toString()
-
-            viewModel.loginUser(email,password)
+            onLoginClicked()
 
         }
 
-        binding?.buttonBackToRegister?.setOnClickListener {
+        binding?.signUpText?.setOnClickListener {
+            authVM.resetAuthSate()
             findNavController().navigate(R.id.registerFragment)
 
         }
 
-        viewModel.state.observe(viewLifecycleOwner){state ->
-            onStateChange(state)
 
-        }
-
-        }
-        private fun onStateChange(state: UIState<LoginVM.State>){
-            when(state){
+        authVM.loginState.observe(viewLifecycleOwner) { state ->
+            when (state) {
                 is UIState.Success -> {
-                    onSuccess(state.data)
-                }
-                is UIState.Loading ->{
+                    if (state.data.isLogined) {
+                        Log.d("LoginFragment", "onViewCreated: ")
+                        findNavController().navigate(R.id.action_loginFragment_to_baseFragment)
+                    }
 
                 }
-                is UIState.Error -> {
-                    Toast.makeText(requireContext(), "${state.errorMessage}", Toast.LENGTH_SHORT).show()
+
+                is UIState.Loading -> {
+
                 }
+
+                is UIState.Error -> {
+                    showError(state)
+                }
+
+                else -> {}
             }
         }
 
+    }
 
-        private fun onSuccess(state: LoginVM.State){
-            if (state.isLogined){
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToBaseFragment())
-            }
-            showFieldError(state.isValidMail, state.isValidPassword)
 
+    private fun onLoginClicked() {
+        binding?.emailInputLayout?.error = null
+        binding?.passwordInputLayout?.error = null
+
+        val email = binding?.emailInput?.text.toString()
+        val password = binding?.passwordInput?.text.toString()
+
+        var isValid = true
+
+        if (email.isEmpty()) {
+            binding?.emailInputLayout?.error = "Email не может быть пустым"
+            isValid = false
+        }
+        if (password.isEmpty()) {
+            binding?.passwordInputLayout?.error = "Пароль не может быть пустым"
+            isValid = false
+        }
+        if (isValid) {
+            authVM.loginUser(email = email, password = password)
+        }
 
     }
-    private fun showFieldError(isValidEmail: Boolean, isValidPassword: Boolean){
-        if( !isValidEmail)
-            binding?.emailInputLayout?.error = "Email is not correct"
 
-        if(!isValidPassword)
-            binding?.passwordInputLayout?.error = "Password is not correct"
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

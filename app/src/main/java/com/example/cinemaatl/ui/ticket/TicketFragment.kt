@@ -11,12 +11,12 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.cinemaatl.BookingVM
 import com.example.cinemaatl.R
 import com.example.cinemaatl.databinding.FragmentTicketBinding
-import com.example.cinemaatl.ui.base.SharedVM
-import com.example.cinemaatl.ui.userticket.CompletePaymentDialogFragment
+import com.example.cinemaatl.ui.shared.SharedVM
+import com.example.cinemaatl.ui.shared.BookingVM
 import dagger.hilt.android.AndroidEntryPoint
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -26,12 +26,9 @@ class TicketFragment : Fragment() {
     private var binding: FragmentTicketBinding? = null
 
     private val sharedVM by activityViewModels<SharedVM>()
-
-//    private val viewModelSeats by activityViewModels<SeatsVM>()
-//    private val viewModelUserTickets by activityViewModels<UserTicketVM>()
     private val bookingVM by activityViewModels<BookingVM>()
     private val ticketVM by activityViewModels<TicketVM>()
-    private var timer:CountDownTimer? = null
+    private var timer: CountDownTimer? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +39,6 @@ class TicketFragment : Fragment() {
         return binding?.root
 
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -60,43 +56,45 @@ class TicketFragment : Fragment() {
 
         bookingVM.createdTicket.observe(viewLifecycleOwner) { ticket ->
             if (ticket != null) {
-                binding?.tvDate?.text = ticket.selectedDate // Только день, как было в createTicket
+                binding?.tvDate?.text = ticket.selectedDate
                 binding?.tvTime?.text = ticket.selectedTime
-                binding?.tvSeats?.text =
-                    getString(R.string.row_inticket, ticket.selectedSeats.joinToString(", "))
+                binding?.tvSeats?.text = ticket.selectedSeats.joinToString()
+//                    getString(R.string.row_inticket, ticket.selectedSeats.joinToString(", "))
                 binding?.totalPrice?.text = "${ticket.totalPrice} $"
 
-                // Запускаем таймер
                 startTimer()
             }
         }
     }
+
     private fun startTimer() {
-        timer?.cancel() // Отменяем предыдущий таймер, если был
-        timer = object : CountDownTimer(1000, 1000) { // 10 секунд
+        timer?.cancel()
+        timer = object : CountDownTimer(10000, 1000) {
+            @SuppressLint("StringFormatMatches")
             override fun onTick(millisUntilFinished: Long) {
                 if (binding != null) {
-                    binding!!.timer.text = getString(R.string.payment_finish_after_seconds, millisUntilFinished / 1000)
+                    binding!!.timer.text =
+                        getString(R.string.payment_finish_after_seconds, millisUntilFinished / 1000)
                 }
             }
 
             override fun onFinish() {
                 val ticket = bookingVM.createdTicket.value
-                if(ticket != null){
+                if (ticket != null) {
 
-                    Log.d("TicketFragment", "Saving ticket: id=${ticket.id}, movieName=${ticket.movieName}")
                     ticketVM.saveTicket(ticket)
                 }
+                findNavController().navigate(R.id.action_ticketFragment_to_paymentSuccess)
 
-                val dialog = CompletePaymentDialogFragment()
-                dialog.show(parentFragmentManager, "CompletePaymentDialogFragment")
+
             }
         }
         timer!!.start()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        timer?.cancel() // Останавливаем таймер при уничтожении фрагмента
+        timer?.cancel()
         binding = null
     }
 }

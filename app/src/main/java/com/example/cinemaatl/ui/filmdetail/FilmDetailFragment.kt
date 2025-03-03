@@ -12,9 +12,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.cinemaatl.R
-import com.example.cinemaatl.UIState
+import com.example.cinemaatl.ui.core.UIState
 import com.example.cinemaatl.databinding.FragmentFilmDetailBinding
-import com.example.cinemaatl.ui.base.SharedVM
+import com.example.cinemaatl.ui.shared.SharedVM
 import dagger.hilt.android.AndroidEntryPoint
 import eightbitlab.com.blurview.BlurView
 import eightbitlab.com.blurview.RenderScriptBlur
@@ -56,7 +56,8 @@ class FilmDetailFragment : Fragment() {
                 binding?.tvDesc?.text = movie.description ?: "No description"
                 binding?.movieTitle?.text = movie.name ?: "Unknown"
                 binding?.tvYear?.text = movie.year ?: "N/A"
-                binding?.duration?.text = movie.movieLength ?: "N/A"
+                binding?.duration?.text = movie.movieLength+getString(R.string.min)
+//                binding?.duration?.text = movie.movieLength ?: "N/A"
                 binding?.rating?.text = movie.rating?.imdb ?: "N/A"
 
 
@@ -83,10 +84,7 @@ class FilmDetailFragment : Fragment() {
         sharedVM.actors.observe(viewLifecycleOwner) { state ->
             when (state) {
                 is UIState.Success -> {
-                    Log.d(
-                        "FilmDetail",
-                        "Actors loaded: count=${state.data.size}, First actor: ${state.data.firstOrNull()?.name}"
-                    )
+
                     adapterActor.updatePersons(state.data)
                 }
 
@@ -95,7 +93,7 @@ class FilmDetailFragment : Fragment() {
                 }
 
                 is UIState.Error -> {
-                    Log.e("FilmDetail", "Error loading actors: ${state.errorMessage}")
+
                     adapterActor.updatePersons(emptyList())
                 }
             }

@@ -17,7 +17,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private  var binding: ActivityMainBinding? = null
+    private var binding: ActivityMainBinding? = null
     private var sharedPreference: SharedPreferences? = null
 
     @Inject
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         controller.addOnDestinationChangedListener { _, destination, _ ->
             Log.d("MainActivity", "Current destination: ${destination.id}")
             when (destination.id) {
-                R.id.introFragment,R.id.seatsFragment, R.id.filmDetailFragment,R.id.loginFragment,R.id.registerFragment, R.id.ticketFragment-> {
+                R.id.introFragment, R.id.seatsFragment, R.id.filmDetailFragment, R.id.loginFragment, R.id.registerFragment, R.id.ticketFragment, R.id.paymentSuccess, R.id.registerSuccess -> {
                     Log.d("MainActivity", "Hiding BottomNavigationView")
                     binding?.bottomNavigation?.visibility = View.GONE
                 }
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-                binding?.bottomNavigation?.setOnItemSelectedListener { item ->
+        binding?.bottomNavigation?.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.baseFragment -> {
                     controller.navigate(R.id.baseFragment)
@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
                     controller.navigate(R.id.userTicketsFragment)
                     true
                 }
+
                 R.id.profileFragment -> {
                     controller.navigate(R.id.profileFragment)
                     true
@@ -86,13 +87,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
-        val userID = firebaseAuth.currentUser?.uid
-        val graph = controller.navInflater.inflate(R.navigation.nav_graph)
-        graph.setStartDestination(
-            if (userID == null) R.id.registerFragment else R.id.baseFragment
-        )
-        controller.graph = graph
 
         val savedLanguage = LocaleHelper.getSavedLanguage(this)
         LocaleHelper.setLocale(this, savedLanguage)

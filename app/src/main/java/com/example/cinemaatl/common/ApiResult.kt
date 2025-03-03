@@ -1,4 +1,4 @@
-package com.example.cinemaatl
+package com.example.cinemaatl.common
 
 import com.example.cinemaatl.model.ErrorModel
 

@@ -68,6 +68,7 @@ class SeatListAdapter(
                 }
 
                 else -> {
+                    
                 }
 
             }

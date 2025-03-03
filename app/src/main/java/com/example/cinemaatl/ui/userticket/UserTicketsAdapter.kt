@@ -3,8 +3,10 @@ package com.example.cinemaatl.ui.userticket
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
+import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat.performHapticFeedback
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -23,6 +25,17 @@ class UserTicketsAdapter(
 
     inner class ViewHolderUserTickets(val binding: ViewholderUserticketsBinding) :
         ViewHolder(binding.root)
+//            init {
+//                binding.root.setOnLongClickListener{
+//                    val position = adapterPosition
+//                    if(position!= RecyclerView.NO_POSITION){
+//                        val ticket = dataList[position]
+//                        onDeleteClickListener(ticket)
+//                    }
+//                    true
+//                }
+//            }
+//        }
 
 
     override fun onCreateViewHolder(
@@ -57,16 +70,23 @@ class UserTicketsAdapter(
             holder.binding.moviePoster.setImageResource(R.drawable.ic_noimage)
         }
 
-        holder.binding.deleteBt.setOnClickListener {
-            Log.d(
-                "UserTicketsAdapter",
-                "Deleting ticket: id=${ticket.id}, movieName=${ticket.movieName}"
-            )
+        holder.binding.root.setOnLongClickListener {
             onDeleteClickListener(ticket)
-
+            it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+            true
         }
-
     }
+//        holder.binding.root.setOnLongClickListener {
+//            val pos = holder.adapterPosition
+//            if (pos != RecyclerView.NO_POSITION) {
+//                val ticketAtPos = dataList[pos]
+//                Log.d("UserTicketsAdapter", "Long press on ticket: ${ticketAtPos.movieName}")
+//                it.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
+//                onDeleteClickListener(ticketAtPos)
+//            }
+//            true
+//        }
+//    }
 
     override fun getItemCount(): Int = dataList.size
 

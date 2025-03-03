@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.cinemaatl.ApiResult
+import com.example.cinemaatl.common.ApiResult
 import com.example.cinemaatl.MovieService
-import com.example.cinemaatl.UIState
+import com.example.cinemaatl.ui.core.UIState
 import com.example.cinemaatl.helper.apiCall
 import com.example.cinemaatl.model.Doc
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +35,7 @@ class TopMovieVM @Inject constructor(
                     lists = "top250",
                     sortField = "top250",
                     sortType = "1",
-//                    selectFields = "id,name,description"
+
                 )
             }
 

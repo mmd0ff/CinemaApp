@@ -1,27 +1,25 @@
 package com.example.cinemaatl.ui.register
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.cinemaatl.UIState
-import com.example.cinemaatl.ui.login.LoginVM
+import com.example.cinemaatl.R
 import com.example.cinemaatl.databinding.FragmentRegisterBinding
+import com.example.cinemaatl.ui.core.CoreFragment
+import com.example.cinemaatl.ui.core.UIState
+import com.example.cinemaatl.ui.shared.AuthVM
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment() {
+class RegisterFragment : CoreFragment() {
 
-    private  var binding: FragmentRegisterBinding? = null
-    private val viewModel by viewModels<RegisterVM>()
-    private val loginVM by viewModels<LoginVM>()
+    private var binding: FragmentRegisterBinding? = null
 
+    private val authVM by activityViewModels<AuthVM>()
 
 
     override fun onCreateView(
@@ -29,7 +27,7 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentRegisterBinding.inflate(layoutInflater,container,false)
+        binding = FragmentRegisterBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
@@ -38,95 +36,34 @@ class RegisterFragment : Fragment() {
 
         binding?.buttonRegister?.setOnClickListener {
             onRegisterClicked()
-            Log.d("login", "onViewCreated: Oshibka")
-
 
         }
 
-        binding?.buttonGoToLogin?.setOnClickListener {
+        binding?.signInText?.setOnClickListener {
+            authVM.resetAuthSate()
             findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
 
-
         }
-        viewModel.state.observe(viewLifecycleOwner) { state ->
-            onStateChange(state)
+        authVM.registerState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is UIState.Success -> {
+                    if (state.data.isRegistered) {
+                        findNavController().navigate(R.id.action_registerFragment_to_registerSuccess)
+                    }
+                }
 
+                is UIState.Loading -> {
 
-        }
+                }
 
-        loginVM.state.observe(viewLifecycleOwner){state ->
-            onLoginStateChange(state)
+                is UIState.Error -> {
+                    showError(state)
+                }
+
+                else -> {}
+            }
         }
     }
-
-    private fun onStateChange(state: UIState<RegisterVM.State>) {
-        when (state) {
-            is UIState.Success -> {
-                onSuccess(state.data)
-
-            }
-
-            is UIState.Loading -> {
-
-            }
-
-            is UIState.Error -> {
-                Toast.makeText(requireContext(), "${state.errorMessage}", Toast.LENGTH_SHORT).show()
-            }
-
-        }
-
-    }
-
-    private fun onLoginStateChange(state: UIState<LoginVM.State>) {
-        when(state) {
-            is UIState.Success -> {
-                onLoginSuccess(state.data)
-            }
-
-            is UIState.Loading -> {
-            }
-
-            is UIState.Error -> {
-                Toast.makeText(requireContext(), "${state.errorMessage}", Toast.LENGTH_SHORT).show()
-            }
-
-        }
-    }
-
-    private fun onSuccess(state: RegisterVM.State) {
-        if (state.isRegistered) {
-            loginVM.loginUser(state.email.orEmpty(), state.password.orEmpty())
-            //login
-        }else{
-            showFieldErr0r(state.isValidMail,state.isValidPassword, state.isValidRepeatPassword,state.isValidNickname)
-
-        }
-
-
-    }
-    private fun onLoginSuccess(data: LoginVM.State) {
-        if(data.isLogined){
-            findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToBaseFragment())
-        }
-
-    }
-
-    private fun showFieldErr0r(isValidEmail:Boolean, isValidPassword:Boolean, isValidRepeatPassword:Boolean, isValidNickname:Boolean){
-        if (!isValidEmail)
-            binding?.emailInputLayout?.error = "Email is not correct"
-
-        if(!isValidPassword)
-            binding?.passwordInputLayout?.error = "Password is not correct"
-
-        if(!isValidRepeatPassword)
-            binding?.repeatPasswordInputLayout?.error = "Password is not matched"
-        if(!isValidNickname)
-            binding?.name?.error = "Nickname is not correct"
-
-    }
-
-
 
 
     private fun onRegisterClicked() {
@@ -138,9 +75,33 @@ class RegisterFragment : Fragment() {
         val email = binding?.emailInput?.text.toString()
         val password = binding?.passwordInput?.text.toString()
         val repeatPassword = binding?.repeatPasswordInput?.text.toString()
-        val nickname = binding?.nameInput?.text.toString()
-        viewModel.registerUser(email, password, repeatPassword, nickname)
+        val nickname = binding?.nameInput?.text.toString().orEmpty()
 
+
+        var isValid = true
+        if (email.length < 8) {
+
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding?.emailInputLayout?.error = getString(R.string.invalid_mail)
+            isValid = false
+        }
+        if (password.length < 8) {
+            binding?.passwordInputLayout?.error = getString(R.string.password_length)
+        }
+        if (password != repeatPassword || repeatPassword.isEmpty()) {
+            binding?.repeatPasswordInputLayout?.error = getString(R.string.password_is_not_matched)
+            isValid = false
+        }
+        if (nickname.isEmpty()) {
+            binding?.name?.error = getString(R.string.nicmname_empty)
+            isValid = false
+        }
+
+        // Если всё валидно, отправляем в VM
+        if (isValid) {
+            authVM.registerUser(email = email, nickname = nickname, password = password)
+
+        }
 
 
     }
@@ -149,6 +110,4 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         binding = null
     }
-
-
 }

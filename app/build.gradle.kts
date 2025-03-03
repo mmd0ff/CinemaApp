@@ -32,7 +32,7 @@ android {
             )
         }
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
     }
     compileOptions {
@@ -64,7 +64,7 @@ dependencies {
 
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
-//    implementation(libs.coil)
+
 
     implementation(libs.bundles.networking)
 
@@ -73,24 +73,16 @@ dependencies {
     implementation(libs.swiperefreshlayout)
 
 
-//    implementation(libs.room.runtime)
-//    implementation(libs.room.ktx)
-////    implementation(libs.firebase.messaging)
-//
-//    kapt(libs.room.compiler)
-
     implementation(libs.hilt)
     kapt(libs.hiltCompiler)
 
     implementation(libs.media)
-//    implementation(libs.workManager)
 
-//    implementation("io.coil-kt.coil3:coil:3.0.0-rc01")
-    implementation (libs.glide)
+    implementation(libs.glide)
     kapt(libs.glide)
 
-    implementation (libs.blurview.vversion205)
-    implementation (libs.androidx.core)
+    implementation(libs.blurview.vversion205)
+    implementation(libs.androidx.core)
 
 
 

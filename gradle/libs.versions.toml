@@ -33,7 +33,7 @@ googleGmsGoogleServices = "4.4.2"
 googleFirebaseCrashlytics = "3.0.3"
 firebaseConfig = "22.1.0"
 firebaseFirestore = "25.1.2"
-firebaseAuth = "23.2.0"
+firebaseAuth = "23.0.0"
 firebaseMessaging = "24.1.0"
 
 [libraries]

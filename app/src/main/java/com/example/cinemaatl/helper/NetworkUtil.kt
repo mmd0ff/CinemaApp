@@ -1,7 +1,7 @@
 package com.example.cinemaatl.helper
 
 import android.accounts.NetworkErrorException
-import com.example.cinemaatl.ApiResult
+import com.example.cinemaatl.common.ApiResult
 import com.example.cinemaatl.model.ErrorModel
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "741675070946",
+    "project_id": "cinemaatl",
+    "storage_bucket": "cinemaatl.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741675070946:android:c5273a3cf3c5c17d4b35bb",
+        "android_client_info": {
+          "package_name": "com.example.cinemaatl"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZmZU26y97g4cFzsEka6ovwekF_gv0MME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

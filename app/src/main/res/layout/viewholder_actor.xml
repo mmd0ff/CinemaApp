@@ -2,16 +2,15 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="8dp"
+    android:padding="5dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageActor"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="70dp"
         tools:srcCompat = "@tools:sample/avatars"
-
         app:shapeAppearanceOverlay="@style/CircleImageViewForActorAdapter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +23,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textAlignment="center"
+        android:fontFamily="@font/roboto"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@id/imageActor"
         app:layout_constraintStart_toStartOf="@id/imageActor"
         app:layout_constraintTop_toBottomOf="@id/imageActor"/>

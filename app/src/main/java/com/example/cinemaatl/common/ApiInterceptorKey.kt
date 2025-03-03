@@ -1,4 +1,4 @@
-package com.example.cinemaatl
+package com.example.cinemaatl.common
 
 import okhttp3.Interceptor
 import okhttp3.Response
